@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlton Turusida</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👨🏾‍💻</text></svg>">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f6f5f2;
+            --bg-secondary: #eeecea;
+            --text-color: #111118;
+            --text-muted: #6b6b7a;
+            --card-bg: #ffffff;
+            --card-border: rgba(17,17,24,0.1);
+            --accent: #0a5cff;
+            --accent-2: #00d4aa;
+            --accent-glow: rgba(10, 92, 255, 0.18);
+            --accent-2-glow: rgba(0, 212, 170, 0.18);
+            --nav-bg: rgba(246,245,242,0.82);
+            --border-color: rgba(17,17,24,0.12);
+            --badge-bg: #111118;
+            --badge-text: #f6f5f2;
+            --shadow-card: 0 2px 24px rgba(10,92,255,0.07), 0 1px 4px rgba(17,17,24,0.06);
+            --shadow-hover: 0 12px 48px rgba(10,92,255,0.14), 0 4px 16px rgba(17,17,24,0.09);
+            --transition-speed: 0.3s;
+        }
+
+        body.dark-mode {
+            --bg-color: #0c0d14;
+            --bg-secondary: #12131f;
+            --text-color: #e8e8f0;
+            --text-muted: #8888a0;
+            --card-bg: #13141f;
+            --card-border: rgba(255,255,255,0.07);
+            --accent: #4d8bff;
+            --accent-2: #00d4aa;
+            --accent-glow: rgba(77,139,255,0.18);
+            --accent-2-glow: rgba(0,212,170,0.18);
+            --nav-bg: rgba(12,13,20,0.85);
+            --border-color: rgba(255,255,255,0.08);
+            --badge-bg: rgba(255,255,255,0.06);
+            --badge-text: #e8e8f0;
+            --shadow-card: 0 2px 24px rgba(0,0,0,0.4), 0 1px 4px rgba(0,0,0,0.3);
+            --shadow-hover: 0 12px 48px rgba(77,139,255,0.2), 0 4px 16px rgba(0,0,0,0.5);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'DM Sans', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+            font-size: 1rem;
+        }
+
+        /* ─── BACKGROUND GRID ─── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.5;
+        }
+
+        body > * { position: relative; z-index: 1; }
+
+        /* ─── TYPING ─── */
+        .typing-container { display: inline-block; min-height: 1.2em; }
+        #typing-text::after {
+            content: "|";
+            margin-left: 3px;
+            color: var(--accent);
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* ─── NAVBAR ─── */
+        .navbar {
+            background-color: var(--nav-bg) !important;
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.85rem 2rem;
+            transition: background-color var(--transition-speed);
+        }
+
+        .navbar-brand {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--text-color) !important;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--text-color) !important;
+            font-weight: 500;
+            margin: 0 4px;
+            padding: 0.45rem 0.85rem !important;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            letter-spacing: 0.02em;
+            transition: background var(--transition-speed), color var(--transition-speed);
+        }
+        .nav-link:hover {
+            background: var(--accent-glow);
+            color: var(--accent) !important;
+        }
+
+        /* Light mode: header icons solid black */
+        .header-icons a {
+            color: #000000;
+            font-size: 1.15rem;
+            margin-left: 12px;
+            opacity: 1;
+            transition: opacity 0.2s, color 0.2s, transform 0.2s;
+        }
+        .header-icons a:hover {
+            opacity: 1;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Dark mode: restore original styling for header icons */
+        body.dark-mode .header-icons a {
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        body.dark-mode .header-icons a:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        #theme-toggle {
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin-left: 16px;
+            color: #000000;
+            opacity: 1;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        #theme-toggle:hover {
+            opacity: 1;
+            background: var(--accent-glow);
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Dark mode: restore original theme toggle styling */
+        body.dark-mode #theme-toggle {
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+        body.dark-mode #theme-toggle:hover {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* ─── HERO ─── */
+        .hero-section {
+            padding: 120px 0 100px;
+            text-align: center;
+            animation: fadeInUp 0.9s ease both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-frame {
+            display: inline-block;
+            padding: 4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            margin-bottom: 28px;
+            box-shadow: 0 0 40px var(--accent-glow), 0 0 80px var(--accent-2-glow);
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { box-shadow: 0 0 30px var(--accent-glow), 0 0 60px var(--accent-2-glow); }
+            50%       { box-shadow: 0 0 55px var(--accent-glow), 0 0 100px var(--accent-2-glow); }
+        }
+
+        .profile-frame-inner {
+            padding: 4px;
+            border-radius: 50%;
+            background: var(--bg-color);
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            display: block;
+        }
+
+        .open-to-work-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            margin-top: 4px;
+            margin-bottom: 8px;
+            padding: 5px 14px;
+            border-radius: 100px;
+            background: rgba(40, 167, 69, 0.12);
+            border: 1px solid rgba(40, 167, 69, 0.3);
+            color: #28a745;
+            letter-spacing: 0.03em;
+        }
+
+        .open-to-work-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            box-shadow: 0 0 6px rgba(40,167,69,0.7);
+            animation: dot-pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes dot-pulse {
+            0%, 100% { box-shadow: 0 0 4px rgba(40,167,69,0.5); }
+            50%       { box-shadow: 0 0 12px rgba(40,167,69,0.9); }
+        }
+
+        .hero-section h2:first-of-type {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 6px;
+        }
+
+        .hero-section h2.h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            opacity: 0.75;
+            margin-bottom: 8px;
+        }
+
+        .hero-section .lead {
+            font-size: 0.95rem;
+            opacity: 0.55;
+        }
+
+        /* ─── RESUME BUTTON ─── */
+        .btn-resume {
+            background: linear-gradient(135deg, var(--accent), #1a6fff);
+            color: #fff !important;
+            border: none;
+            padding: 13px 38px;
+            font-weight: 600;
+            border-radius: 100px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 24px;
+            font-size: 0.95rem;
+            letter-spacing: 0.01em;
+            transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+            box-shadow: 0 4px 20px rgba(10, 92, 255, 0.35);
+        }
+        .btn-resume:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(10, 92, 255, 0.5);
+            filter: brightness(1.08);
+            color: #fff !important;
+        }
+        .btn-resume:active { transform: translateY(0); }
+
+        /* ─── SECTIONS ─── */
+        section {
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            margin-bottom: 60px;
+            text-align: center;
+            letter-spacing: -0.02em;
+        }
+
+        /* ─── ABOUT ─── */
+        #about .fs-5 {
+            font-size: 1.1rem !important;
+            line-height: 1.85;
+            opacity: 0.85;
+        }
+        #about .text-uppercase {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.12em;
+        }
+        #about .section-title {
+            margin-bottom: 24px;
+        }
+
+        /* ─── SKILL BADGES ─── */
+        .skill-badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 8px 16px;
+            border-radius: 100px;
+            margin: 5px 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid var(--card-border);
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s, color 0.18s;
+            cursor: default;
+        }
+        .skill-badge:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px var(--accent-glow);
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        body.dark-mode .skill-badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-color: var(--border-color);
+        }
+
+        #skills h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: -0.01em;
+        }
+
+        #skills p.mb-2 strong {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ─── PROJECT CARDS ─── */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 32px;
+            border-radius: 20px;
+            height: 100%;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(10, 92, 255, 0.25);
+        }
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .project-card .text-muted {
+            color: var(--text-muted) !important;
+        }
+
+        .project-card .btn-resume {
+            padding: 9px 24px;
+            font-size: 0.875rem;
+            margin-top: 12px;
+        }
+
+        .border-dashed {
+            border-style: dashed !important;
+            opacity: 0.6;
+        }
+
+        /* ─── TECH STACK BADGES ─── */
+        .tech-badge {
+            display: inline-block;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 5px 13px;
+            border-radius: 100px;
+            margin: 4px 3px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: 1px solid var(--card-border);
+            transition: transform 0.18s, box-shadow 0.18s, background 0.18s, color 0.18s;
+            cursor: default;
+        }
+        .tech-badge:hover {
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 4px 16px var(--accent-2-glow);
+            background: var(--accent-2);
+            color: #fff;
+            border-color: var(--accent-2);
+        }
+        body.dark-mode .tech-badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            border-color: var(--border-color);
+        }
+        .tech-stack-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            opacity: 0.6;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            margin-top: 12px;
+            display: block;
+        }
+
+        /* ─── EDUCATION CARDS ─── */
+        .education-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 36px;
+            border-radius: 20px;
+            height: 100%;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+        .education-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+        .education-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0, 212, 170, 0.25);
+        }
+        .education-card:hover::after { opacity: 1; }
+
+        .education-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .education-card .text-muted {
+            color: var(--text-muted) !important;
+            font-size: 0.85rem;
+        }
+
+        /* ─── STATUS BADGE ─── */
+        .project-status-live {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            padding: 4px 12px;
+            border-radius: 100px;
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid rgba(40, 167, 69, 0.25);
+            color: #28a745;
+            width: fit-content;
+        }
+        .status-dot-green {
+            width: 7px;
+            height: 7px;
+            background-color: #28a745;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+            box-shadow: 0 0 5px rgba(40,167,69,0.7);
+            animation: dot-pulse 1.5s ease-in-out infinite;
+        }
+
+        /* ─── CONTACT ─── */
+        .contact-btn {
+            width: fit-content;
+            min-width: 300px;
+            margin: 0 auto 14px auto;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-color) !important;
+            padding: 14px 28px;
+            border-radius: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            font-weight: 500;
+            font-size: 0.975rem;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.2s, color 0.2s;
+            box-shadow: var(--shadow-card);
+            gap: 0;
+        }
+        .contact-btn i {
+            width: 20px;
+            margin-right: 16px;
+            color: var(--accent);
+            font-size: 1rem;
+        }
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent);
+            background: var(--accent-glow);
+            color: var(--text-color) !important;
+        }
+
+        /* ─── CONTACT BUTTONS COLUMN (left-aligned, no auto margin) ─── */
+        .contact-btns-col .contact-btn {
+            margin-left: 0;
+            margin-right: 0;
+            width: 100%;
+        }
+
+        /* ─── CONTACT FORM ─── */
+        .contact-form-input {
+            width: 100%;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-color);
+            padding: 13px 18px;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+            outline: none;
+            resize: vertical;
+        }
+        .contact-form-input::placeholder {
+            color: var(--text-muted);
+            opacity: 0.8;
+        }
+        .contact-form-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+            background: var(--card-bg);
+        }
+
+        /* Send button — resets btn-resume margin for form use */
+        .contact-form-submit {
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        body.dark-mode .btn-resume,
+        body.dark-mode .skill-badge,
+        body.dark-mode .contact-btn {
+            /* overridden by specific dark-mode vars above */
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            font-weight: 500;
+        }
+
+        /* ─── COMING SOON ─── */
+        #projects .text-center p {
+            font-size: 1rem;
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        /* ─── SCROLL ANIMATIONS ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 991px) {
+            .navbar-nav { padding: 16px 0; text-align: center; }
+            .header-icons { margin-top: 12px; justify-content: center; }
+            .contact-btn { min-width: 260px; }
+        }
+
+        @media (max-width: 575px) {
+            .hero-section { padding: 80px 0 60px; }
+            section { padding: 70px 0; }
+            .profile-img { width: 150px; height: 150px; }
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Carlton Turusida</a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                style="border-color: var(--border-color);">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home"><i class="fas fa-house me-1"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about"><i class="fas fa-user me-1"></i> About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills"><i class="fas fa-wrench me-1"></i> Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects"><i class="fas fa-diagram-project me-1"></i> Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education"><i class="fas fa-graduation-cap me-1"></i> Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact"><i class="fas fa-envelope me-1"></i> Contact</a></li>
+                </ul>
+                
+                <!-- CHANGE 3: Updated LinkedIn and GitHub URLs in header -->
+                <div class="header-icons d-flex align-items: center justify-content-center">
+                    <a href="https://www.linkedin.com/in/carltonturusida" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/carltonturusida" target="_blank"><i class="fab fa-github"></i></a>
+                    <div id="theme-toggle"><i class="fas fa-sun"></i></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section container">
+        <div class="profile-frame">
+            <div class="profile-frame-inner">
+                <img src="profile.jpeg" alt="Carlton Turusida" class="profile-img">
+            </div>
+        </div>
+        <div>
+            <span class="open-to-work-label">
+                <span class="open-to-work-dot"></span> Open to work
+            </span>
+        </div>
+        <h2><span id="typing-text" class="typing-container"></span></h2>
+        <!-- CHANGE 2: Updated hero heading with Problem Solver and Tech Enthusiast -->
+        <h2 class="h3 mb-3">Full-Stack Software Engineer💻 | Problem Solver🧠 | Tech Enthusiast🛸</h2>
+        <p class="lead">Pretoria, Gauteng, South Africa📍</p>
+        <!-- CHANGE 1: Replaced fa-file-pdf with fa-download -->
+        <a href="CARLTON_TURUSIDA_Resume.pdf" download class="btn-resume">
+            <i class="fas fa-download me-2"></i> My Resume
+        </a>
+    </section>
+
+    <section id="about" class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 text-center reveal">
+                <p class="text-uppercase fw-bold mb-1" style="font-size: 0.8rem; letter-spacing: 4px; opacity: 0.7;">Introduction</p>
+                <h2 class="section-title mt-0 mb-4">About Me👨🏾‍💻</h2>
+                <p class="fs-5">
+                    I'm Carlton Turusida, a Full-Stack Software Engineer driven by a passion for solving problems and building technology that makes a real impact. Skilled in full-stack development, programming, database management, frameworks, libraries, and modern software tools and platforms, I design systems that boost efficiency and deliver value. I tackle challenges with clarity, teamwork, and accountability, while constantly learning and adapting. My focus is on driving digital transformation and ensuring that every project I contribute to leaves a lasting, positive impact.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="container">
+        <h2 class="section-title reveal">Skills🛠️</h2>
+        <div class="row g-5">
+            <div class="col-md-7 reveal">
+                <h4 class="mb-4 text-center">Technical Skills</h4>
+                
+                <p class="mb-2"><strong><i class="fas fa-code me-2" style="color: var(--accent)"></i> Programming Languages:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">Python🐍</span><span class="skill-badge">C#💠</span>
+                    <span class="skill-badge">JavaScript📜</span><span class="skill-badge">TypeScript🔷</span>
+                    <span class="skill-badge">Java☕</span><span class="skill-badge">C++⚙️</span>
+                    <span class="skill-badge">Kotlin📱</span><span class="skill-badge">SQL🗄️</span>
+                </div>
+
+                <p class="mb-2"><strong><i class="fas fa-laptop-code me-2" style="color: var(--accent)"></i> Frontend Development:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">HTML5🌐</span><span class="skill-badge">CSS3🎨</span>
+                    <span class="skill-badge">React.js⚛️</span><span class="skill-badge">Bootstrap🅱️</span>
+                    <span class="skill-badge">Tailwind CSS🌬️</span><span class="skill-badge">Responsive Web Design📱</span>
+                    <span class="skill-badge">UI/UX Design🎨</span>
+                </div>
+
+                <!-- CHANGE 4: Added API Integration after REST APIs -->
+                <p class="mb-2"><strong><i class="fas fa-server me-2" style="color: var(--accent)"></i> Backend Technologies:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">Node.js🟢</span><span class="skill-badge">ASP.NET Core🚀</span>
+                    <span class="skill-badge">Django🎸</span><span class="skill-badge">Flask🌶️</span>
+                    <span class="skill-badge">PHP🐘</span><span class="skill-badge">REST APIs🔗</span>
+                    <span class="skill-badge">API Integration🔌</span>
+                </div>
+
+                <p class="mb-2"><strong><i class="fas fa-database me-2" style="color: var(--accent)"></i> Databases:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">MySQL🐬</span><span class="skill-badge">PostgreSQL🐘</span>
+                    <span class="skill-badge">MongoDB🍃</span><span class="skill-badge">Microsoft SQL Server🗄️</span>
+                </div>
+
+                <!-- CHANGE 5: Added Android SDK between Android Studio and Anaconda -->
+                <p class="mb-2"><strong><i class="fas fa-wrench me-2" style="color: var(--accent)"></i> Tools & Platforms:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">Git🔧</span><span class="skill-badge">GitHub🐙</span>
+                    <span class="skill-badge">Visual Studio💜</span><span class="skill-badge">Visual Studio Code🟦</span>
+                    <span class="skill-badge">Android Studio🤖</span><span class="skill-badge">Android SDK📱</span>
+                    <span class="skill-badge">Anaconda🐍</span><span class="skill-badge">Firebase🔥</span>
+                    <span class="skill-badge">XAMPP🧪</span><span class="skill-badge">phpMyAdmin🗃️</span>
+                    <span class="skill-badge">Weebly🧩</span><span class="skill-badge">WordPress📰</span>
+                </div>
+
+                <!-- CHANGE 6: Replaced Microsoft Office Suite with Development Practices & Concepts -->
+                <p class="mb-2"><strong><i class="fas fa-flask me-2" style="color: var(--accent)"></i> Development Practices & Concepts:</strong></p>
+                <div class="mb-4">
+                    <span class="skill-badge">Testing & Debugging🧪</span>
+                    <span class="skill-badge">Security Best Practices🔒</span>
+                    <span class="skill-badge">Command Line & Terminal💻</span>
+                    <span class="skill-badge">Computer Literacy🖥️</span>
+                </div>
+            </div>
+
+            <div class="col-md-5 reveal">
+                <h4 class="mb-4 text-center">Soft Skills</h4>
+                <div class="d-flex flex-wrap justify-content-center">
+                    <span class="skill-badge">Leadership & Mentoring👑</span>
+                    <span class="skill-badge">Teamwork & Collaboration🤝</span>
+                    <span class="skill-badge">Communication🗣️</span>
+                    <span class="skill-badge">Research & Analytical Thinking🔍</span>
+                    <span class="skill-badge">Problem-Solving💡</span>
+                    <span class="skill-badge">Time Management⏱️</span>
+                    <span class="skill-badge">Adaptability🌪️</span>
+                    <span class="skill-badge">Attention to Detail🎯</span>
+                    <span class="skill-badge">Creativity🎨</span>
+                    <span class="skill-badge">Flexibility🔄</span>
+                    <span class="skill-badge">Remote Collaboration🌍</span>
+                    <span class="skill-badge">Multitasking🧩</span>
+                    <span class="skill-badge">Decision-Making⚖️</span>
+                    <span class="skill-badge">Accountability📌</span>
+                    <span class="skill-badge">Stress Management🧘</span>
+                    <span class="skill-badge">Professionalism💼</span>
+                    <span class="skill-badge">Resilience🛡️</span>
+                    <span class="skill-badge">Fast Learning🚀</span>
+                    <span class="skill-badge">Active Listening👂</span>
+                    <span class="skill-badge">Conflict Resolution🤝</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 class="section-title reveal">Projects🚀</h2>
+        <div class="row g-4">
+            <!-- CHANGES 7 & 8: Updated button text to "View Live Project", updated icon, converted tech stacks to badges -->
+            <div class="col-md-4 reveal">
+                <div class="project-card">
+                    <h3>SADirectDeals🛒</h3>
+                    <div class="project-status-live"><span class="status-dot-green"></span> Live</div>
+                    <p class="text-muted fw-bold">E-commerce platform</p>
+                    <p class="small text-muted">Feb 2025 - Jun 2025</p>
+                    <p class="small text-muted"><strong>Role:</strong> Full-Stack Developer</p>
+                    <p>A community-driven e-commerce platform connecting South African buyers and sellers through a secure online marketplace.</p>
+                    <span class="tech-stack-label">Tech Stack</span>
+                    <div class="mb-2">
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">CSS</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Bootstrap</span>
+                        <span class="tech-badge">PHP</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">phpMyAdmin</span>
+                        <span class="tech-badge">XAMPP</span>
+                        <span class="tech-badge">InfinityFree</span>
+                        <span class="tech-badge">VS Code</span>
+                    </div>
+                    <a href="https://sadirectdeals.great-site.net/" target="_blank" class="btn-resume mt-2">
+                        <i class="fas fa-arrow-up-right-from-square me-2"></i>View Live Project
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="project-card">
+                    <h3>Carlton Turusida Portfolio💼</h3>
+                    <div class="project-status-live"><span class="status-dot-green"></span> Live</div>
+                    <p class="text-muted fw-bold">Personal portfolio website</p>
+                    <p class="small text-muted">Mar 2026 - Mar 2026</p>
+                    <p class="small text-muted"><strong>Role:</strong> Web Designer & Developer</p>
+                    <p>A modern, responsive personal portfolio website showcasing my skills, projects, and professional growth.</p>
+                    <span class="tech-stack-label">Tech Stack</span>
+                    <div class="mb-2">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Bootstrap 5</span>
+                        <span class="tech-badge">Font Awesome</span>
+                        <span class="tech-badge">Google Fonts</span>
+                        <span class="tech-badge">Responsive Web Design</span>
+                        <span class="tech-badge">UI/UX Design</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                    </div>
+                    <a href="https://carltonturusida.github.io/my-portfolio-website/" target="_blank" class="btn-resume mt-2">
+                        <i class="fas fa-arrow-up-right-from-square me-2"></i>View Live Project
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="project-card">
+                    <h3>Job Tracker — Smart Job Application Dashboard📊</h3>
+                    <div class="project-status-live"><span class="status-dot-green"></span> Live</div>
+                    <p class="text-muted fw-bold">Smart job tracker website</p>
+                    <p class="small text-muted">May 2026 - May 2026</p>
+                    <p class="small text-muted"><strong>Role:</strong> AI-Assisted Full-Stack Developer</p>
+                    <p>A smart job tracking web application that helps users manage applications, monitor progress, and stay organized throughout the job search process.</p>
+                    <span class="tech-stack-label">Tech Stack</span>
+                    <div class="mb-2">
+                        <span class="tech-badge">React 18</span>
+                        <span class="tech-badge">Vite</span>
+                        <span class="tech-badge">TypeScript</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">HTML</span>
+                        <span class="tech-badge">SQL</span>
+                        <span class="tech-badge">Lovable Cloud</span>
+                        <span class="tech-badge">Supabase</span>
+                        <span class="tech-badge">Shadcn UI</span>
+                        <span class="tech-badge">React Router</span>
+                        <span class="tech-badge">React Query</span>
+                        <span class="tech-badge">Zod</span>
+                        <span class="tech-badge">Lucide Icons</span>
+                    </div>
+                    <a href="https://carltonturusidajobtracker.lovable.app/" target="_blank" class="btn-resume mt-2">
+                        <i class="fas fa-arrow-up-right-from-square me-2"></i>View Live Project
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="project-card">
+                    <h3>Aurevyn — Premium South African E-Commerce Frontend🛍️</h3>
+                    <div class="project-status-live"><span class="status-dot-green"></span> Live</div>
+                    <p class="text-muted fw-bold">E-commerce frontend platform</p>
+                    <p class="small text-muted">May 2026 - May 2026</p>
+                    <p class="small text-muted"><strong>Role:</strong> Frontend Developer</p>
+                    <p>Aurevyn is a premium South African e-commerce frontend showcasing a sleek multi-page shopping experience. It delivers smooth interactions, responsive design, and a complete client-side shopping flow with curated fashion, electronics, and lifestyle products.</p>
+                    <span class="tech-stack-label">Tech Stack</span>
+                    <div class="mb-2">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript (ES6+)</span>
+                        <span class="tech-badge">Responsive Web Design</span>
+                        <span class="tech-badge">UI/UX Design Principles</span>
+                        <span class="tech-badge">Netlify</span>
+                        <span class="tech-badge">VS Code</span>
+                        <span class="tech-badge">SVG Icons</span>
+                        <span class="tech-badge">Unsplash Images</span>
+                        <span class="tech-badge">LocalStorage API</span>
+                    </div>
+                    <a href="https://aurevyn.netlify.app/" target="_blank" class="btn-resume mt-2">
+                        <i class="fas fa-arrow-up-right-from-square me-2"></i>View Live Project
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 reveal">
+                <div class="project-card">
+                    <h3>Aurora Auth — Premium Animated Login & Signup UI✨</h3>
+                    <div class="project-status-live"><span class="status-dot-green"></span> Live</div>
+                    <p class="text-muted fw-bold">Modern Animated Authentication Interface</p>
+                    <p class="small text-muted">May 2026 - May 2026</p>
+                    <p class="small text-muted"><strong>Role:</strong> UI/UX Designer & Frontend Developer</p>
+                    <p>A futuristic, fully animated authentication interface featuring glassmorphism, neon gradients, smooth transitions, and immersive interactive effects. Designed to deliver a premium login and signup experience inspired by modern platforms like Stripe, Linear, Framer, and Apple.</p>
+                    <span class="tech-stack-label">Tech Stack</span>
+                    <div class="mb-2">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">Vanilla JavaScript (ES6+)</span>
+                        <span class="tech-badge">Bootstrap 5</span>
+                        <span class="tech-badge">Responsive Web Design</span>
+                        <span class="tech-badge">GitHub Pages</span>
+                        <span class="tech-badge">VS Code</span>
+                        <span class="tech-badge">Google Fonts</span>
+                        <span class="tech-badge">SVG Icons & Favicon</span>
+                        <span class="tech-badge">Glassmorphism UI</span>
+                    </div>
+                    <a href="https://carltonturusida.github.io/aurora-auth/" target="_blank" class="btn-resume mt-2">
+                        <i class="fas fa-arrow-up-right-from-square me-2"></i>View Live Project
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <p class="fs-5 opacity-75"><em>Future projects coming soon... 🚀</em></p>
+        </div>
+    </section>
+
+    <!-- CHANGE 2: Updated education section text formatting -->
+    <section id="education" class="container">
+        <h2 class="section-title reveal">Education🎓</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-5 reveal">
+                <div class="education-card">
+                    <h4 class="fw-bold">Eduvos</h4>
+                    <p class="mb-1"><strong>Bachelor of Science in Information Technology (Software Engineering)</strong></p>
+                    <p class="text-muted small mb-1">Feb 2023 - Nov 2025</p>
+                    <p class="text-muted small mb-0">Pretoria, Gauteng, South Africa</p>
+                </div>
+            </div>
+            <div class="col-md-5 reveal">
+                <div class="education-card">
+                    <h4 class="fw-bold">Eduvos</h4>
+                    <p class="mb-1"><strong>Higher Certificate in Information Systems (Software Development)</strong></p>
+                    <p class="text-muted small mb-1">Feb 2020 - Nov 2021</p>
+                    <p class="text-muted small mb-0">Pretoria, Gauteng, South Africa</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─── CONTACT ME (updated: 2-column layout with form) ─── -->
+    <section id="contact" class="container">
+        <h2 class="section-title reveal">Contact Me📞</h2>
+        <p class="text-center mb-5 reveal" style="opacity: 0.75; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Let's connect and build impactful digital experiences together. Feel free to reach out for collaborations, opportunities, or technology discussions.
+        </p>
+        <div class="row g-5 justify-content-center">
+
+            <!-- LEFT: Contact Buttons -->
+            <div class="col-md-5 contact-btns-col d-flex flex-column reveal">
+                <a href="tel:0627451868" class="contact-btn">
+                    <i class="fas fa-phone-alt"></i> 062 745 1868
+                </a>
+                <a href="mailto:carltonturusida@gmail.com" class="contact-btn">
+                    <i class="fas fa-envelope"></i> cturusida@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/carltonturusida" target="_blank" class="contact-btn">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/carltonturusida" target="_blank" class="contact-btn">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+
+            <!-- RIGHT: Contact Form -->
+            <div class="col-md-6 reveal">
+                <form action="https://formsubmit.co/cturusida@gmail.com" method="POST">
+                    <!-- Disable FormSubmit captcha -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <div class="mb-3">
+                        <input type="text" name="name" class="contact-form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="email" name="email" class="contact-form-input" placeholder="Your Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" name="subject" class="contact-form-input" placeholder="Subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="message" class="contact-form-input" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-resume contact-form-submit">
+                        <i class="fas fa-paper-plane me-2"></i> Send Message
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Carlton Turusida. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggle.querySelector('i');
+
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const typingElement = document.getElementById('typing-text');
+        // CHANGE 1: Updated typing text
+        const textToType = "Hi there, I'm Carlton Turusida";
+        let charIndex = 0;
+        let isDeleting = false;
+        let typeSpeed = 150;
+
+        function type() {
+            const currentText = textToType.substring(0, charIndex);
+            typingElement.textContent = currentText;
+
+            if (!isDeleting && charIndex < textToType.length) {
+                charIndex++;
+                typeSpeed = 150;
+            } else if (isDeleting && charIndex > 0) {
+                charIndex--;
+                typeSpeed = 100;
+            } else {
+                isDeleting = !isDeleting;
+                typeSpeed = isDeleting ? 1000 : 500;
+            }
+
+            setTimeout(type, typeSpeed);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            type();
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry, i) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, 80);
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
